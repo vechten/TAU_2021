@@ -12,6 +12,7 @@ RSpec.describe 'http_tests' do
       response = Net::HTTP.get_response(URI('https://place.dog/raz/jeden'))
       expect(response.code).to eq('400')
       response_body = JSON.parse(response.body)
+      expect(response_body).not_to be_empty
       expect(response_body).to eq('message' => 'Please provide a valid width and height')
     end
 
