@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe PrimeNumberChecker do
   let(:numbers) { (3..11) }
   subject { PrimeNumberChecker.new(numbers) }

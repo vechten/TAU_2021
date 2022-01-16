@@ -5,9 +5,9 @@ class PrimeNumberChecker
     @numbers = numbers
   end
 
-  def difficult_string
-    @numbers = @numbers.map { |x| Mathematical.new.render(x) }
-  end
+  # def difficult_string
+  #   @numbers = @numbers.map { |x| Mathematical.new.render(x) }
+  # end
 
   def last_prime?
     return nil unless @numbers.present?
