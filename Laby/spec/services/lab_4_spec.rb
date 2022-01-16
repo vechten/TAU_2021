@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 RSpec.describe PrimeNumberChecker do
   let(:numbers) { (3..11) }
   subject { PrimeNumberChecker.new(numbers) }
@@ -8,7 +10,7 @@ RSpec.describe PrimeNumberChecker do
 
     it 'should return false for no prime number' do
       numbers = (1..10)
-      pnc     = PrimeNumberChecker.new(numbers)
+      pnc = PrimeNumberChecker.new(numbers)
       expect(pnc.last_prime?).to be_falsey
     end
   end
@@ -51,7 +53,30 @@ RSpec.describe PrimeNumberChecker do
 
     context 'when array has prime numbers' do
       it { expect(subject.no_prime?).to be_falsey }
-      it { expect(subject.last_prime?).to be_falsey }
+    end
+  end
+
+  describe 'new tests for lab 4' do
+    let(:numbers) { [4, 6, 8, 9, 7] }
+    it { expect(subject.no_prime?).to be_falsey }
+    it { expect(subject.prime_filter).to eq(7) }
+    it { expect(subject.prime_filter.size).to eq(1) }
+
+    context "test for new functions" do
+      let(:numbers) { %w[3 4 5 6] }
+      it { expect(subject.difficult_string.no_prime?).to be_falsey }
+      it { expect(subject.difficult_string.prime_filter).to includes([3, 5]) }
+      it { expect(subject.difficult_string.prime_filter).not_to be_empty }
+
+    end
+  end
+
+  describe 'dependency check' do
+    context 'check if there is a dependency error' do
+      it { expect(subject.no_prime?).not_to raise_error }
+      it { expect(subject.prime_filter).not_to raise_error }
+      it { expect(Mathematical).not_to raise_error }
+      it { expect(Prime).not_to raise_error }
     end
   end
 end
